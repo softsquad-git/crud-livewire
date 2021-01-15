@@ -54,7 +54,7 @@ class Cms extends Component
     /**
      * @var array $tags
      */
-    public $tags = [];
+    public $tags;
 
     /**
      * @var null|\App\Models\Cms $item
@@ -73,7 +73,6 @@ class Cms extends Component
         $this->repositoryCms = new CmsRepository();
         $this->serviceCms = new CmsService();
         $this->repositoryTag = new TagsRepository();
-        $this->tags = $this->repositoryTag->findAll();
     }
 
     public function render()
@@ -115,6 +114,10 @@ class Cms extends Component
         $this->description = $item->description;
         $this->title = $item->title;
         $this->cmsId = $id;
+        $tags = $item->tags;
+        foreach ($tags as $tag) {
+            $this->checkedTags[] = $tag;
+        }
 
         return $this->isEdit = true;
     }
@@ -177,4 +180,5 @@ class Cms extends Component
         $item = $this->repositoryCms->find($id);
         return $this->item = $item;
     }
+
 }
