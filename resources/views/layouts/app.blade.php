@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
     @livewireStyles
     @stack('styles')

@@ -10,7 +10,9 @@
         @include('livewire.tag-create')
     @endif
     @if($isEdit)
-        @include('livewire.tag-edit')
+       <div style="margin-top: 50px">
+           @include('livewire.tag-edit')
+       </div>
     @endif
     @if($tags->count() > 0)
         <table class="table-fixed w-full">

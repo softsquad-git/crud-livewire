@@ -10,3 +10,6 @@ Route::get('tag', Tag::class)->name('tag');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::post('upload', 'App\Http\Controllers\UploadFileController@upload')
+    ->name('upload');

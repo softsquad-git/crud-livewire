@@ -15,9 +15,7 @@ class CmsService
      */
     public function delete(Cms $cms): ?bool
     {
-        foreach (CmsTag::where('cms_id', $cms->id)->get() as $ct) {
-            $ct->delete();
-        }
+        $this->removeTags($cms);
         return $cms->delete();
     }
 
@@ -30,6 +28,7 @@ class CmsService
     {
         if ($cms) {
             $cms->update($data);
+            $this->removeTags($cms);
             $this->saveTags($data['tags'], $cms->id);
 
             return $cms;
@@ -43,13 +42,32 @@ class CmsService
         return $cms;
     }
 
+    /**
+     * @param array $tags
+     * @param int $cmsId
+     */
     private function saveTags(array $tags, int $cmsId)
     {
         foreach ($tags as $tag) {
-            CmsTag::create([
-                'cms_id' => $cmsId,
-                'tag_id' => $tag
-            ]);
+           if ($tag != 0) {
+               CmsTag::create([
+                   'cms_id' => $cmsId,
+                   'tag_id' => $tag
+               ]);
+           }
         }
+    }
+
+    /**
+     * @param Cms $cms
+     * @return bool
+     */
+    private function removeTags(Cms $cms)
+    {
+        foreach ($cms->tags as $ct) {
+            $ct->delete();
+        }
+
+        return true;
     }
 }

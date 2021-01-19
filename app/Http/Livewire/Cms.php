@@ -114,10 +114,11 @@ class Cms extends Component
         $this->description = $item->description;
         $this->title = $item->title;
         $this->cmsId = $id;
-        $tags = $item->tags;
-        foreach ($tags as $tag) {
-            $this->checkedTags[] = $tag;
+        $tags = [];
+        foreach ($item->tags as $tag) {
+            $tags[] = $tag->tag_id;
         }
+        $this->tags = array_fill_keys($tags, 1);
 
         return $this->isEdit = true;
     }
@@ -180,5 +181,6 @@ class Cms extends Component
         $item = $this->repositoryCms->find($id);
         return $this->item = $item;
     }
+
 
 }

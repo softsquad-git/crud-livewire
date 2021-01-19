@@ -11,14 +11,17 @@
     <h2>CMS</h2>
 </x-slot>
 <div class="py-12" style="padding: 10px">
-    <button wire:click="isCreate()" class="float-right text-white font-bold py-2 px-4 rounded mb-2 @if($isCreate) bg-red-500 hover:bg-red-700 @else bg-green-500 hover:bg-green-700 @endif">
+    <button wire:click="isCreate()"
+            class="float-right text-white font-bold py-2 px-4 rounded mb-2 @if($isCreate) bg-red-500 hover:bg-red-700 @else bg-green-500 hover:bg-green-700 @endif">
         @if($isCreate) Anuluj @else Dodaj @endif
     </button>
     @if($isCreate)
         @include('livewire.cms-create')
     @endif
     @if($isEdit)
-        @include('livewire.cms-edit')
+        <div style="margin-top: 50px">
+            @include('livewire.cms-edit')
+        </div>
     @endif
     @if($item)
         @include('livewire.cms-item')
@@ -40,12 +43,16 @@
                     <td class="border px-4 py-2">{{ $item->title }}</td>
                     <td class="border px-4 py-2 text-center">{{ $item->created_at }}</td>
                     <td class="border px-4 py-2 text-center">
-                        <button wire:click="find({{ $item->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button wire:click="find({{ $item->id }})"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Zobacz
                         </button>
-                        <button wire:click="isEdit({{ $item->id }})" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edytuj
+                        <button wire:click="isEdit({{ $item->id }})"
+                                class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Edytuj
                         </button>
-                        <button wire:click="delete({{ $item->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Usuń</button>
+                        <button wire:click="delete({{ $item->id }})"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Usuń
+                        </button>
                     </td>
                 </tr>
             @endforeach
