@@ -88,8 +88,8 @@ class Cms extends Component
      */
     public function isCreate(): bool
     {
+        $this->resetInput();
         if ($this->isCreate) {
-            $this->resetInput();
             return $this->isCreate = false;
         }
 
@@ -103,9 +103,8 @@ class Cms extends Component
      */
     public function isEdit(int $id = null): bool
     {
-        $this->emitUp('initTinyMCE');
+        $this->resetInput();
         if ($this->isEdit) {
-            $this->resetInput();
             return $this->isEdit = false;
         }
 
@@ -115,9 +114,10 @@ class Cms extends Component
         $this->cmsId = $id;
         $tags = [];
         foreach ($item->tags as $tag) {
-            $tags[] = $tag->tag_id;
+            $this->tags[$tag->tag_id] = $tag->tag_id;
         }
-        $this->tags = array_fill_keys($tags, 1);
+
+      //  dd($this->tags);
 
         return $this->isEdit = true;
     }
@@ -138,7 +138,6 @@ class Cms extends Component
     {
         $data = $request->get('serverMemo')['data'];
         $this->serviceCms->save($data);
-
         $this->isCreate();
     }
 
