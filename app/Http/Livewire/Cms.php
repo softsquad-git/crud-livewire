@@ -52,9 +52,9 @@ class Cms extends Component
     public $cmsId;
 
     /**
-     * @var array $tags
+     * @var array|null $tags
      */
-    public $tags;
+    public $tags = [];
 
     /**
      * @var null|\App\Models\Cms $item
@@ -88,7 +88,6 @@ class Cms extends Component
      */
     public function isCreate(): bool
     {
-        $this->emitUp('initTinyMCE');
         if ($this->isCreate) {
             $this->resetInput();
             return $this->isCreate = false;
@@ -128,6 +127,8 @@ class Cms extends Component
         $this->description = '';
         $this->title = '';
         $this->tags = [];
+        $this->cmsId = '';
+        $this->checkedTags = [];
     }
 
     /**

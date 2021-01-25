@@ -63,6 +63,8 @@ class Tag extends Component
             return $this->isCreate = false;
         }
 
+        $this->resetInput();
+        $this->isEdit = false;
         return $this->isCreate = true;
     }
 
@@ -82,6 +84,7 @@ class Tag extends Component
         $item = $this->tagsRepository->find($id);
         $this->name = $item->name;
 
+        $this->isCreate = false;
         return $this->isEdit = true;
     }
 
@@ -100,6 +103,11 @@ class Tag extends Component
         $this->isCreate();
     }
 
+    /**
+     * @param TagRequest $request
+     * @param int|null $id
+     * @throws Exception
+     */
     public function update(TagRequest $request, int $id = null)
     {
         $data = $request->get('serverMemo')['data'];

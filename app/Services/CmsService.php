@@ -35,7 +35,7 @@ class CmsService
         }
 
         $cms = Cms::create($data);
-        if ($cms) {
+        if ($cms && isset($data['tags']) && !empty($data['tags'])) {
             $this->saveTags($data['tags'], $cms->id);
         }
 
