@@ -1,12 +1,12 @@
 <div class="mb-4">
-    <input type="text" aria-label="Wpisz tytuł"
+    <input type="text" aria-label="Wpisz tytuł" required
            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
            id="exampleFormControlInput1" placeholder="Wpisz tytuł" wire:model="title">
     @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
 </div>
 
 @include('livewire.partials.editor')
-
+@error('description') <span class="text-red-500">{{ $message }}</span> @enderror
 <div class="mb-4">
     @foreach($allTags as $tag)
         <label for="{{$tag->id}}"><input type="checkbox" wire:model="tags.{{$tag->id}}" value="{{ $tag->id }}"

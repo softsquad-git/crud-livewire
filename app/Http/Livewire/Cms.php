@@ -64,6 +64,14 @@ class Cms extends Component
     public $checkedTags;
 
     /**
+     * @var string[] $rules
+     */
+    protected $rules = [
+        'title' => 'required',
+        'description' => 'required'
+    ];
+
+    /**
 
      * @param null $id
      */
@@ -136,6 +144,7 @@ class Cms extends Component
      */
     public function store(CmsRequest $request)
     {
+        $this->validate();
         $data = $request->get('serverMemo')['data'];
         $this->serviceCms->save($data);
         $this->isCreate();
@@ -148,6 +157,7 @@ class Cms extends Component
      */
     public function update(CmsRequest $request, int $id)
     {
+        $this->validate();
         $data = $request->get('serverMemo')['data'];
         $item = $this->repositoryCms->find($id);
         $this->serviceCms->save($data, $item);
